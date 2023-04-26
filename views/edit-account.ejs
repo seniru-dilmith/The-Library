@@ -1,0 +1,41 @@
+<%- include("partials/header") -%>
+
+  <form class="edit-details-form" action="/edit-account" method="post">
+
+    <table class="edit-row">
+
+      <tr>
+        <th>
+          First Name
+        </th>
+        <td>
+          <input name="user_f_name" type="text" class="form-control" id="InputEmail" aria-describedby="emailHelp" value="<%=  first_name  %>">
+        </td>
+      </tr>
+
+      <tr>
+        <th>
+          Last Name
+        </th>
+        <td>
+          <input name="user_l_name" type="text" class="form-control" id="InputEmail" aria-describedby="emailHelp" value="<%=  last_name  %>">
+        </td>
+      </tr>
+
+    </table>
+
+    <div id="edit-config-buttons">
+
+      <button type="submit" name="submit-button" class="btn btn-info">Save Details</button> <br>
+
+      <a href="/edit-account">
+
+        <button type="button" name="reset-data-button" class="btn btn-info">Reset to current values</button>
+
+      </a>
+
+    </div>
+
+  </form>
+
+<%- include("partials/footer") -%>

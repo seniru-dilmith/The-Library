@@ -1,0 +1,208 @@
+html{
+  padding: 0 5%;
+}
+
+/* Top headings section */
+
+#selectors-top{
+  background-color: #ffffff;
+  width: 100%;
+  height: 5%;
+}
+
+/* Home Page */
+
+#carousel-photos img{
+  padding: 0 5%;
+  height: 685px;
+}
+
+#top-heading{
+  text-align: center;
+  margin-top: 5px;
+  padding-top: 0;
+}
+
+#login-buttons{
+  padding: 3%;
+  text-align: center;
+}
+
+#login-buttons .btn{
+  width: 85%;
+  height: 130%;
+  font-size: 1.5em;
+}
+
+/* login Page */
+
+.login-form-area{
+  align-items: center;
+  margin: auto;
+  text-align: center;
+}
+
+.login-form-area input{
+  margin: auto;
+  width: 30%;
+}
+
+.login-form-area button{
+  padding: 10px 5%;
+}
+
+.login-form-area h1{
+  padding: 2%;
+  font-size: 5em;
+}
+
+#enter_details{
+  font-size: 1.2rem;
+  color: #468391;
+  font-weight: bolder;
+}
+
+#togglePassword{
+  margin-left: -30px;
+  cursor: pointer;
+}
+
+.form-inputs{
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  height: 40px;
+}
+
+/* Sign-Up page */
+
+.sign-up-form-area h1{
+  padding: 2%;
+  font-size: 5em;
+  text-align: center;
+}
+
+.sign-up-form-area {
+  padding-left: 30%;
+  padding-right: 30%;
+  text-align: center;
+}
+
+#password_matching_label{
+  font-size: 1.2rem;
+  color: #fc0303;
+  font-weight: bolder;
+}
+
+#message{
+  display: none;
+  background: #f1f1f1;
+  color: #000;
+  position: relative;
+  padding: 0.5%;
+  margin: 5%;
+}
+
+#message p {
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+#message h3 {
+  font-size: 1.2rem;
+}
+
+.valid {
+  color: green;
+}
+
+.invalid {
+  color: red;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+}
+
+.form-inputs-sign-up{
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #f8f8f8;
+  height: 40px;
+}
+
+ input[type="password"]{
+  width: 90%;
+}
+
+ input[type="email"]{
+  width: 100%;
+}
+
+/* Book Details Page */
+
+#books-details{
+  width: 70%;
+  border: 3px solid black;
+}
+
+.book-details{
+  border: 1px solid black;
+}
+
+#books-details{
+  margin: auto;
+  margin-top: 50px;
+}
+
+#books-details th{
+  text-align: center;
+}
+
+#books-details td{
+  margin: 10%;
+  text-align: center;
+  padding: 0.5rem 5rem;
+}
+
+#edit-config-buttons{
+  position: absolute;
+  right: 5%;
+  padding: 1%;
+}
+
+#edit-config-buttons button{
+  margin: 3% auto;
+}
+
+#admin-bullets{
+  padding-top: 3%;
+  font-size: 1.5rem;
+}
+
+.how-to-gif{
+  padding-left: 10%;
+}
+
+/* Edit Account Page */
+.edit-row{
+  width: 100%;
+}
+
+.edit-details-form{
+  padding-bottom: 2%;
+}
+
+/* FAQs */
+
+.faq-qs{
+  padding: 2% 0;
+}

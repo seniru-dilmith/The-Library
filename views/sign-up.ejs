@@ -1,0 +1,67 @@
+<%- include("partials/header") -%>
+
+<div class="sign-up-form-area">
+
+  <h1> <span id="greeting-first-line"> For new users </span> <br>
+    Sign Up! </h1>
+
+  <form action="/sign-up" method="post">
+
+    <div class="name row">
+
+      <div class="mb-3 col-lg-6 name-inputs" id="fName">
+        <label for="InputFirstName" class="form-label">First Name</label><br>
+        <input name="user_f_name" type="text" class="form-inputs-sign-up" id="InputFirstName" size="30" placeholder="First Name">
+      </div>
+
+      <div class="mb-3 col-lg-6 name-inputs" id="lName">
+        <label for="InputLastName" class="form-label">Last Name</label><br>
+        <input name="user_l_name" type="text" class="form-inputs-sign-up" id="InputLastName" size="30" placeholder="Last Name">
+      </div>
+
+    </div>
+
+    <div class="mb-3">
+      <label for="InputEmail" class="form-label" id="email-label">Email address</label><br>
+      <input name="email_of_user" type="email" class="form-inputs-sign-up" id="InputEmail" aria-describedby="emailHelp" value="" placeholder="user@company.com">
+      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+    </div>
+
+    <div class="mb-3">
+      <label for="InputPassword01" class="form-label">Password</label><br>
+
+      <input type="password" name="user_password_01" id="InputPassword01" class="form-inputs-sign-up" value="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+      <i class="far fa-eye" id="togglePassword" style="margin-left: -30px; cursor: pointer;"></i>
+
+    </div>
+
+    <div id="message">
+      <h3>Password must contain the following:</h3>
+      <p id="letter" class="invalid">A <strong>lowercase</strong> letter</p>
+      <p id="capital" class="invalid">A <strong>capital (uppercase)</strong> letter</p>
+      <p id="number" class="invalid">A <strong>number</strong></p>
+      <p id="length" class="invalid">Minimum <strong>8 characters</strong></p>
+    </div>
+
+    <div class="mb-3">
+      <label for="InputPassword02" class="form-label">re-enter your password</label><br>
+      <input name="user_password_02" type="password" class="form-inputs-sign-up" id="InputPassword02" value="" required>
+    </div>
+
+    <div class="mb-3">
+      <label id="password_matching_label" class="form-label"> <%=  message  %> </label>
+    </div>
+
+    <div class="end-buttons">
+
+    <button type="submit" class="btn btn-primary" id="sign-up-button" disabled="true">Sign me Up</button> <br> <br>
+    <button type="button" class="btn btn-primary" onclick="window.location.href = '/login';">Already have an account? Login here!</button>
+
+    </div>
+  </form>
+
+</div>
+
+<script src="js/sign-up.js" charset="utf-8"></script>
+
+<%- include("partials/footer") -%>

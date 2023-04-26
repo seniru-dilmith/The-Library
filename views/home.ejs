@@ -1,0 +1,41 @@
+<%- include("partials/header") -%>
+
+  <h1 id="top-heading"> Welcome to Alisha Libraries </h1>
+
+  <div id="carousel-photos" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="images\pexels-element-digital-1370295.jpg" class="d-block w-100" alt="Img_1">
+        </div>
+      <div class="carousel-item">
+        <img src="images\pexels-genaro-servín-757855.jpg" class="d-block w-100" alt="Img_2">
+      </div>
+      <div class="carousel-item">
+        <img src="images\pexels-stanislav-kondratiev-2908984.jpg" class="d-block w-100" alt="Img_3">
+      </div>
+    </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel-photos" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel-photos" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+  </div>
+
+  <div id="login-buttons" class="row">
+
+    <div class="login col-lg-6">
+      <button class="btn btn-primary" type="button" name="button" onclick="window.location.href = '/login';">Login</button>
+    </div>
+
+    <div class="sign-up col-lg-6">
+      <button class="btn btn-warning" type="button" name="button" onclick="window.location.href = '/sign-up';">Sign-Up</button>
+    </div>
+
+  </div>
+
+  <script src="js/index.js" charset="utf-8"></script>
+  
+<%- include("partials/footer") -%>

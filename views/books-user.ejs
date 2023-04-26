@@ -1,0 +1,54 @@
+<%- include("partials/header") -%>
+
+  <table border="2" id="books-details">
+    <thead>
+      <tr>
+        <th class="book-details">Book ID</th>
+        <th class="book-details">Book's Name</th>
+        <th class="book-details">Author</th>
+        <th class="book-details">Availability</th>
+        <th class="book-details">Available on:</th>
+
+        <%      if (visibility==="") {      %>
+          <th class="book-details">Action:</th>
+        <%      }     %>
+
+      </tr>
+    </thead>
+
+    <tbody id="results">
+
+    </tbody>
+
+  </table>
+
+  <%      if (visibility==="") {      %>
+
+    <div class="container-fluid">
+
+      <ul id="admin-bullets">
+
+        <li>When adding books to the table, don't leave any of the editable columns (Book's Name, Author, Availability, Available on:) empty. Like Below...</li>
+        <img src="images\when-adding-records.gif" width="70%" class="how-to-gif">
+        <li>When inserting new records, on the availability column, for 'Yes' put 1 and for 'No' put 0. Otherwise your input won't be considered.</li>
+        <li>When adding items Please follow the above rows patterns.</li>
+        <li>When updating records, on the availability column, put 'YES' or 'No' instead of 1 and 0. Like Below...</li>
+        <img src="images\when-updating-records.gif" width="70%" class="how-to-gif">
+
+      </ul>
+
+    </div>
+
+  <%      }     %>
+
+  <%      if (visibility==="") {      %>
+
+    <script src="js/books-user-if.js" charset="utf-8"></script>
+
+  <%      } else {     %>
+
+    <script src="js/books-user-else.js" charset="utf-8"></script>
+
+    <%    }   %>
+
+<%- include("partials/footer") %>
