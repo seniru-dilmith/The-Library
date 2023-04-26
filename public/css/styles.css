@@ -71,6 +71,14 @@ html{
   cursor: pointer;
 }
 
+#InputEmailLogin{
+  width: 35%;
+}
+
+#InputPasswordLogin{
+  width: 35%;
+}
+
 .form-inputs{
   box-sizing: border-box;
   border: 2px solid #ccc;
@@ -143,12 +151,13 @@ html{
   height: 40px;
 }
 
- input[type="password"]{
+ .InputPassword-sign-up{
+  left: 0;
   width: 90%;
 }
 
- input[type="email"]{
-  width: 100%;
+ #InputEmail{
+  width: 90%;
 }
 
 /* Book Details Page */
