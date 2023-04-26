@@ -10,6 +10,10 @@ html{
   height: 5%;
 }
 
+.dropdown-menu{
+  background-color: #d5d8db;
+}
+
 /* Home Page */
 
 #carousel-photos img{
