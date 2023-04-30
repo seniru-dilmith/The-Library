@@ -1,13 +1,17 @@
+// Getting dotenv
 require('dotenv').config();
 
+// requiring common packages
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql");
 const vanillajs = require("vanillajs");
 const md5 = require("md5");
 
+// creating app
 const app = express();
 
+// making connection to the database
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -95,16 +99,21 @@ try {
 //
 // // -------------------------------------------------------------------------------------------
 
+// setting common things up
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.use(express.static("public"));
 
+// declaring some variables to use on html pages
 var message_to_show = "";
 var user_logged_in = false;
 var admin_logged_in = false;
 var user_notification = "";
+
+// logged in user is the user currently logged in on the website
+// this objects holds the data of him/her
 var logged_in_user = {
   userID: 0,
   first_name: "",
@@ -114,6 +123,8 @@ var logged_in_user = {
   admin: 0,
 };
 
+// temporary user is a object which holds a user's data until
+// until he clicks the sign up button on the sign up page
 var temporary_user = {
   userID: 0,
   first_name: "",
@@ -123,6 +134,8 @@ var temporary_user = {
   admin: 0,
 };
 
+// admin user is a user objects which holds data of an admin
+// This object's purpose is to clarify whether the user is an admin or a regular user
 var admin_user = {
   userID: 0,
   first_name: "",
@@ -132,8 +145,14 @@ var admin_user = {
   admin: 1,
 };
 
+// this user count variable is used on sign up page 
+// to determine whether, are there any users with the currnt email, 
+// entered on the signup page
 var data_count = 0;
 
+// This variable also help to determine whether a user is
+// an admin or a regular user,
+// it holds "hidden" for a regular user and "" for an admin 
 var hidden_or_no = "hidden";
 
 
@@ -141,6 +160,8 @@ var hidden_or_no = "hidden";
 
 // Root------------------------------------------------------------------------------------------------------------------
 app.get("/", function(req, res){
+  
+//   getting rendered the home page for users GET request
   res.render("home", {
     user_name: logged_in_user.first_name,
     user: logged_in_user,
@@ -153,6 +174,7 @@ app.get("/", function(req, res){
 
 app.get("/login", function(req, res){
 
+  //   getting rendered the login users GET request
     res.render("login", {
       message: user_notification,
       user_name: logged_in_user.first_name,
@@ -167,6 +189,7 @@ app.get("/login", function(req, res){
 // Sign-Up Route---------------------------------------------------------------------------------------------------------
 app.get("/sign-up", function(req, res){
 
+  //   getting rendered the sign-up page for users GET request
   res.render("sign-up", {
     message: message_to_show,
     user_name: logged_in_user.first_name,
@@ -180,10 +203,15 @@ app.get("/sign-up", function(req, res){
 // Books-User Route------------------------------------------------------------------------------------------------------
 
 app.get("/books-user", function(req, res){
+  
+//   rendering the same ejs template with different arguments for different scenarios
 
+//      for a regular user
     if (admin_user.email==="") {
       hidden_or_no = "hidden";
     } else {
+      
+//       for an admin
       hidden_or_no = "";
     }
 
