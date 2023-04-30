@@ -16,54 +16,75 @@ const connection = mysql.createConnection({
 });
 
 // Create libDB database---------------------------------------------------------------------
-//
-// try {
-//   connection.query("CREATE DATABASE libDB");
-// } catch (e) {
-//   console.log(e);
-// } finally {
-//   console.log("Tried creating libDB database");
-// }
+
+try {
+  connection.query("CREATE DATABASE IF NOT EXISTS libDB");
+} catch (e) {
+  console.log(e);
+} finally {
+  console.log("Tried creating libDB database");
+}
 
 // -----------------------------------------------------------------------------------------------
 //
 // Creating Table users----------------------------------------------------------------------
-//
-// try {
-//   connection.query("CREATE TABLE users (" +
-//     "userID INT PRIMARY KEY AUTO_INCREMENT, " +
-//     "firstName VARCHAR(255)," +
-//     "lastName VARCHAR(255)," +
-//     "email VARCHAR(255)," +
-//     "password MEDIUMTEXT," +
-//     "admin BOOL" +
-//     ")"
-//   )
-// } catch (e) {
-//   console.log(e);
-// } finally {
-//   console.log("Tried creating table users in libDB database");
-// }
+
+try {
+  connection.query(`CREATE TABLE IF NOT EXISTS users (
+    userID INT PRIMARY KEY AUTO_INCREMENT,
+    firstName VARCHAR(255),
+    lastName VARCHAR(255),
+    email VARCHAR(255),
+    password MEDIUMTEXT,
+    admin BOOL
+      )`
+    );
+} catch (e) {
+  console.log(e);
+} finally {
+  console.log("Tried creating table users in libDB database");
+}
 
 // ------------------------------------------------------------------------------------------
 
 // Creating Table books----------------------------------------------------------------------
-//
-// try {
-//   connection.query("CREATE TABLE books (" +
-//     "bookID INT PRIMARY KEY AUTO_INCREMENT, " +
-//     "bookName VARCHAR(255)," +
-//     "author VARCHAR(255)," +
-//     "availability BOOL," +
-//     "availableOn DATE" +
-//     ")"
-//   )
-// } catch (e) {
-//   console.log(e);
-// } finally {
-//   console.log("Tried creating table users in libDB database");
-// }
-//
+
+try {
+  connection.query(`CREATE TABLE IF NOT EXISTS books (
+    bookID INT PRIMARY KEY AUTO_INCREMENT,
+    bookName VARCHAR(255),
+    author VARCHAR(255),
+    availability BOOL,
+    availableOn DATE
+    )`
+  );
+} catch (e) {
+  console.log(e);
+} finally {
+  console.log("Tried creating table books in libDB database");
+}
+
+// ------------------------------------------------------------------------------------------
+
+// Creating Table users----------------------------------------------------------------------
+
+try {
+  connection.query(`CREATE TABLE IF NOT EXISTS users (
+  userID int NOT NULL AUTO_INCREMENT,
+  firstName varchar(255) DEFAULT NULL,
+  lastName varchar(255) DEFAULT NULL,
+  email varchar(255) DEFAULT NULL,
+  password mediumtext,
+  admin tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (userID)
+    )`
+  );
+} catch (e) {
+  console.log(e);
+} finally {
+  console.log("Tried creating table users in libDB database");
+}
+
 // ------------------------------------------------------------------------------------------
 
 // Connecting to database--------------------------------------------------------------------
@@ -317,53 +338,67 @@ app.post("/login", function(req, res){
     admin: 0
   };
 
-  connection.query(query_1, function(err, rows){
+  if (user_data['userID']!==0) {
 
-    user_data = {
-      userID: parseInt(rows[0]['userID']),
-      first_name: rows[0]['firstName'],
-      last_name: rows[0]['lastName'],
-      email: rows[0]['email'],
-      password: rows[0]['password'],
-      admin: parseInt(rows[0]['admin'])
-    };
+    connection.query(query_1, function(err, rows){
 
-    if (user_data.password===password_entered && user_data!==null && user_data['admin']===0){
+      console.log(query_1);
 
-      user_logged_in = true;
-      admin_logged_in = false;
+      user_data = {
+        userID: parseInt(rows[0]['userID']),
+        first_name: rows[0]['firstName'],
+        last_name: rows[0]['lastName'],
+        email: rows[0]['email'],
+        password: rows[0]['password'],
+        admin: parseInt(rows[0]['admin'])
+      };
 
-      logged_in_user.userID = user_data.userID;
-      logged_in_user.first_name = user_data.first_name;
-      logged_in_user.last_name = user_data.last_name;
-      logged_in_user.email = user_data.email;
-      logged_in_user.password = user_data.password;
-      logged_in_user.admin = 0;
+      console.log(user_data);
+      console.log(password_entered + " is the converted from textbox.");
 
-      res.redirect("/books-user");
+      if (user_data.password===password_entered && user_data!==null && user_data['admin']===0){
 
-    } else if(user_data.password===password_entered && user_data!==null && user_data['admin']>0){
+        user_logged_in = true;
+        admin_logged_in = false;
 
-      user_logged_in = false;
-      admin_logged_in = true;
+        logged_in_user.userID = user_data.userID;
+        logged_in_user.first_name = user_data.first_name;
+        logged_in_user.last_name = user_data.last_name;
+        logged_in_user.email = user_data.email;
+        logged_in_user.password = user_data.password;
+        logged_in_user.admin = 0;
 
-      admin_user.userID = user_data.userID;
-      admin_user.first_name = user_data.first_name;
-      admin_user.last_name = user_data.last_name;
-      admin_user.email = user_data.email;
-      admin_user.password = user_data.password;
-      admin_user.admin = 1;
+        res.redirect("/books-user");
 
-      res.redirect("/books-user");
+      } else if(user_data.password===password_entered && user_data!==null && user_data['admin']>0){
 
-    } else {
+        user_logged_in = false;
+        admin_logged_in = true;
 
-      user_notification = "No user exits for above credentials. Please try again.";
-      res.redirect("/login");
+        admin_user.userID = user_data.userID;
+        admin_user.first_name = user_data.first_name;
+        admin_user.last_name = user_data.last_name;
+        admin_user.email = user_data.email;
+        admin_user.password = user_data.password;
+        admin_user.admin = 1;
 
-    }
+        res.redirect("/books-user");
 
-  });
+      } else {
+
+        user_notification = "No user exits for above credentials. Please try again.";
+        res.redirect("/login");
+
+      }
+
+    });
+
+  } else {
+
+    user_notification = "No user exits for above credentials. Please try again.";
+    res.redirect("/login");
+
+  }
 
 });
 // -----------------------------------------------------------------------------------------------------------------
@@ -388,8 +423,6 @@ app.post("/sign-up", function(req, res){
 
   connection.query(query_2, function(err, rows){
     used_data = parseInt(rows[0]['COUNT(email)']);
-    console.log(rows[0]);
-    console.log(rows[0]['COUNT(email)']);
 
     if (temporary_user.first_name!="" && temporary_user.last_name!="" && temporary_user.email!="" && password_entered!="" && again_entered_password!=""){
       if(used_data===0){
@@ -407,14 +440,12 @@ app.post("/sign-up", function(req, res){
         // const collection = database."users";
 
           const sql = "INSERT INTO users (firstName, lastName, email, password, admin) " +
-          "VALUES (" + "'" + logged_in_user.first_name.toString() + "'" + ", " + "'" + logged_in_user.last_name.toString() + "'" + ", " + "'" + logged_in_user.email.toString() + "'" + ", " + "'" + md5(logged_in_user.password.toString()) + "'" + ", 0)";
+          "VALUES (" + "'" + logged_in_user.first_name.toString() + "'" + ", " + "'" + logged_in_user.last_name.toString() + "'" + ", " + "'" + logged_in_user.email.toString() + "'" + ", " + "'" + logged_in_user.password + "'" + ", 0)";
 
           connection.query(sql, function(err, rows){
 
             user_logged_in = true;
             logged_in_user = temporary_user;
-
-            console.log(sql);
 
           });
 
@@ -457,7 +488,6 @@ app.post("/add_data", function(req, res){
     res.json({
       message: 'Data Added'
     });
-    console.log(sql);
   });
 
 });
@@ -524,8 +554,6 @@ app.post("/delete_data", function(req, res){
 
   const sql = `DELETE from books
   WHERE bookid=${id}`;
-
-  console.log(sql);
 
   connection.query(sql, function(err, rows){
 

@@ -71,20 +71,30 @@ html{
   cursor: pointer;
 }
 
-#InputEmailLogin{
-  width: 35%;
-}
-
-#InputPasswordLogin{
-  width: 35%;
-}
-
 .form-inputs{
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 10px;
   background-color: #f8f8f8;
   height: 40px;
+}
+
+#InputEmailLogin {
+  width: 40%;
+}
+
+#InputPasswordLogin {
+  width: 40%;
+}
+
+#InputPassword01{
+  width: 90%;
+}
+
+#no-user-label{
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 /* Sign-Up page */
@@ -151,12 +161,15 @@ html{
   height: 40px;
 }
 
- .InputPassword-sign-up{
-  left: 0;
+ input[type="password"]{
   width: 90%;
 }
 
- #InputEmail{
+ input[type="email"]{
+  width: 100%;
+}
+
+#InputEmailSignUp {
   width: 90%;
 }
 

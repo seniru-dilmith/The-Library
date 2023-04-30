@@ -3,24 +3,10 @@
   var capital = document.getElementById("capital");
   var number = document.getElementById("number");
   var length = document.getElementById("length");
-  var user_notification = document.getElementById("password_matching_label");
 
   // When the user clicks on the password field, show the message box
   myInput.onfocus = function() {
     document.getElementById("message").style.display = "block";
-    user_notification.innerHTML = "";
-  }
-
-  document.getElementById("InputLastName").onfocus = function() {
-    user_notification.innerHTML = "";
-  }
-
-  document.getElementById("InputFirstName").onfocus = function() {
-    user_notification.innerHTML = "";
-  }
-
-  document.getElementById("InputEmail").onfocus = function() {
-    user_notification.innerHTML = "";
   }
 
   // When the user clicks outside of the password field, hide the message box
