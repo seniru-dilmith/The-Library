@@ -1,4 +1,4 @@
-// Getting dotenv
+// Getting dotenvDATBASE_HOSTNAME
 require('dotenv').config();
 
 // requiring common packages
@@ -12,12 +12,17 @@ const md5 = require("md5");
 // creating app
 const app = express();
 
+const databaseHost = process.env.DATBASE_HOSTNAME;
+const databasePassword = process.env.DATABASE_PASSWORD;
+const databaseUser = process.env.DATABASE_USERNAME;
+const databaseName = process.env.DATABASE_NAME;
+
 // making connection to the database
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "12345",
-  database: "libDB"
+  host: databaseHost,
+  user: databaseUser,
+  password: databasePassword,
+  database: databaseName
 });
 
 // Create libDB database--------------------------------------------------------------------------
@@ -372,7 +377,7 @@ app.post("/login", function(req, res){
   var username_enrtered = req.body.user_email;
   var password_entered = md5(req.body.user_password);
 
-  // const database = "libDB";
+  // const database = databaseName;
   // const collection = database."users";
 
 //   this line is the MySQL query for checking whether is there an account matching with the given username 
@@ -513,7 +518,7 @@ app.post("/sign-up", function(req, res){
 //           passwoerd is encrypted when saving
           logged_in_user.password = md5(password_entered);
 
-        // const database = "libDB";
+        // const database = databaseName;
         // const collection = database."users";
 
 //           constructing the MySQL command for insertin g above data
