@@ -1,4 +1,4 @@
-// Getting dotenvDATBASE_HOSTNAME
+// Getting dotenv
 require('dotenv').config();
 
 // requiring common packages
@@ -11,6 +11,7 @@ const md5 = require("md5");
 
 // creating app
 const app = express();
+
 
 // getting private information from dotenv
 const databaseHost = process.env.DATBASE_HOSTNAME;
@@ -682,6 +683,7 @@ app.post("/delete_data", function(req, res){
 
 
 // Listening -----------------------------------------------------------------------------------------------------------
+
 
 // assigning a port(3000) to the app to run on
 app.listen(process.env.PORT || 3000, function(){
