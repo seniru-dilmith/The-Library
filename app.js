@@ -12,6 +12,7 @@ const md5 = require("md5");
 // creating app
 const app = express();
 
+// getting private information from dotenv
 const databaseHost = process.env.DATBASE_HOSTNAME;
 const databasePassword = process.env.DATABASE_PASSWORD;
 const databaseUser = process.env.DATABASE_USERNAME;
