@@ -12,15 +12,22 @@ const md5 = require("md5");
 // creating app
 const app = express();
 
+
+// getting private information from dotenv
+const databaseHost = process.env.DATBASE_HOSTNAME;
+const databasePassword = process.env.DATABASE_PASSWORD;
+const databaseUser = process.env.DATABASE_USERNAME;
+const databaseName = process.env.DATABASE_NAME;
+
 // making connection to the database
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "12345",
-  database: "libDB"
+  host: databaseHost,
+  user: databaseUser,
+  password: databasePassword,
+  database: databaseName
 });
 
-// Create libDB database---------------------------------------------------------------------
+// Create libDB database--------------------------------------------------------------------------
 
 try {
   connection.query("CREATE DATABASE IF NOT EXISTS libDB");
@@ -32,7 +39,7 @@ try {
 
 // -----------------------------------------------------------------------------------------------
 //
-// Creating Table users----------------------------------------------------------------------
+// Creating Table users---------------------------------------------------------------------------
 
 try {
   connection.query(`CREATE TABLE IF NOT EXISTS users (
@@ -90,9 +97,9 @@ try {
   console.log("Tried creating table users in libDB database");
 }
 
-// ------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------------------------
 
-// Connecting to database--------------------------------------------------------------------
+// Connecting to database------------------------------------------------------------------------
 //
 // connection.connect((error) => {
 //   console.log("Successfully connected to libDB");
@@ -323,9 +330,9 @@ app.get("/book-list-data", function(req, res){
 
 // --------------------------------------------------------------------------------------------------------------------------
 
-//-----------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------
 
-//About Us Route---------------------------------------------------------------------------------------------------------
+//About Us Route-------------------------------------------------------------------------------------------------------------
 
 // this route is for a simple page which shows everyone
 // the about details of ther library
@@ -372,7 +379,7 @@ app.post("/login", function(req, res){
   var username_enrtered = req.body.user_email;
   var password_entered = md5(req.body.user_password);
 
-  // const database = "libDB";
+  // const database = databaseName;
   // const collection = database."users";
 
 //   this line is the MySQL query for checking whether is there an account matching with the given username 
@@ -513,7 +520,7 @@ app.post("/sign-up", function(req, res){
 //           passwoerd is encrypted when saving
           logged_in_user.password = md5(password_entered);
 
-        // const database = "libDB";
+        // const database = databaseName;
         // const collection = database."users";
 
 //           constructing the MySQL command for insertin g above data
@@ -558,7 +565,7 @@ app.post("/sign-up", function(req, res){
 
 // -------------------------------------------------------------------------------------------------------------------
 
-// Add data to table-----------------------------------------------------------------------------------------------
+// Add data to table--------------------------------------------------------------------------------------------------
 
 // adding books to the books table
 // only admins have access
@@ -584,7 +591,7 @@ app.post("/add_data", function(req, res){
 
 });
 
-// ----------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------
 
 // Update data on table route-----------------------------------------------------------------------------------------------
 
@@ -616,7 +623,7 @@ app.post("/update_data", function(req, res){
 
 // ----------------------------------------------------------------------------------------------------------------------
 
-// Edit Details-------------------------------------------------------------------------------------------------------
+// Edit Details----------------------------------------------------------------------------------------------------------
 
 // this route update users' first name and last an names
 app.post("/edit-account", function(req, res){
@@ -645,7 +652,7 @@ app.post("/edit-account", function(req, res){
 
 });
 
-// ---------------------------------------------------------------------------------------------------------------------
+// --------------------------------------------------------------------------------------------------------------------------
 
 // Delete Book Records-------------------------------------------------------------------------------------------------------
 
@@ -675,9 +682,10 @@ app.post("/delete_data", function(req, res){
 // ---------------------------------------------------------------------------------------------------------------------
 
 
-// Listening ---------------------------------------------------------------------------------------------------------
+// Listening -----------------------------------------------------------------------------------------------------------
 
-// assigning a port to the app to run on
+
+// assigning a port(3000) to the app to run on
 app.listen(process.env.PORT || 3000, function(){
   console.log("Server is up and running on port 3000");
 });
